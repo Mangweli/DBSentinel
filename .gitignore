@@ -1,0 +1,6 @@
+backup
+logs
+backup/*
+logs/*
+.env
+mysql.cnf
