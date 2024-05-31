@@ -16,6 +16,9 @@ else
     exit 1
 fi
 
+SCRIPT_PATH="$PWD/index.sh"
+CRON_SCHEDULE="0 */3 * * *";
+
 # Load .env file
 ENV_FILE="$(dirname "0")/.env"
 load_env_file "$ENV_FILE" "$LOG_DIR"
@@ -38,13 +41,21 @@ chmod +x "$UTIL_FILE"
 
 # Check if the cron job already exists
 CRON_JOB="$CRON_SCHEDULE $SCRIPT_PATH"
-CRON_EXITS=$(crontab -l | grep -F "$SCRIPT_PATH")
 
-if [ -n "$CRON_EXITS" ]; then
+CRON_EXISTS=$(crontab -l 2>/dev/null | grep -F "$SCRIPT_PATH")
+
+
+
+    local TIMESTAMP=$(date +"%F_%H-%M-%S")
+    local CURRENT_DATE=$(date +"%F")
+
+    local LOG_FILE="${LOG_DIR}/${CURRENT_DATE}_log.log"
+
+if [ -n "$CRON_EXISTS" ]; then
     echo "[$(date +"%F %T")]: INFO: Cron job already exists"
 else
     # Add the cron job to the crontab
-    (crontab -l; echo "$CRON_JOB") | crontab -
+    (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
     if [ $? -eq 0 ]; then
         echo "[$(date +"%F %T")]: INFO: Cron job added successfully"
     else

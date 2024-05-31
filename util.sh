@@ -19,7 +19,8 @@ load_env_file() {
     if [ -f "$ENV_FILE" ]; then
         while IFS='=' read -r key value; do
             if [[ ! $key =~ ^\s*# ]] && [[ $key ]] && [[ $value ]]; then
-                export "$key"="$(echo $value | sed -e 's/^"//' -e 's/"$//')"
+                value=$(echo $value | sed -e 's/^"//' -e 's/"$//')
+                export "$key"="$value"
             fi
         done < "$ENV_FILE"
     else
