@@ -4,3 +4,4 @@ backup/*
 logs/*
 .env
 mysql.cnf
+.mysql.cnf

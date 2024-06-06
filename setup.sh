@@ -16,8 +16,10 @@ else
     exit 1
 fi
 
-SCRIPT_PATH="$PWD/index.sh"
-CRON_SCHEDULE="0 */3 * * *";
+local SCRIPT_PATH="$PWD/index.sh"
+local CRON_SCHEDULE="0 */3 * * *";
+
+echo "SCRIPT PATH: $SCRIPT_PATH"
 
 # Load .env file
 ENV_FILE="$(dirname "0")/.env"
@@ -44,12 +46,10 @@ CRON_JOB="$CRON_SCHEDULE $SCRIPT_PATH"
 
 CRON_EXISTS=$(crontab -l 2>/dev/null | grep -F "$SCRIPT_PATH")
 
+local TIMESTAMP=$(date +"%F_%H-%M-%S")
+local CURRENT_DATE=$(date +"%F")
 
-
-    local TIMESTAMP=$(date +"%F_%H-%M-%S")
-    local CURRENT_DATE=$(date +"%F")
-
-    local LOG_FILE="${LOG_DIR}/${CURRENT_DATE}_log.log"
+local LOG_FILE="${LOG_DIR}/${CURRENT_DATE}_log.log"
 
 if [ -n "$CRON_EXISTS" ]; then
     echo "[$(date +"%F %T")]: INFO: Cron job already exists"
