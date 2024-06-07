@@ -71,12 +71,12 @@ perform_backup() {
 
 setup() {
     # Define Directories and files path
-    local LOG_DIR="$(dirname "$0")/logs"
+    export LOG_DIR="$(dirname "$0")/logs"
+    export BACKUP_DIR="$(dirname "$0")/backup"
+    
     local ENV_FILE="$(dirname "0")/.env"
     local UTIL_FILE="$(dirname "0")/util.sh"
-    local BACKUP_DIR="$(dirname "$0")/backup"
-
-    local SCRIPT_PATH="$PWD/index.sh"
+    local SCRIPT_PATH="$(realpath "$0" 2>/dev/null || echo $(cd "$(dirname "$0")" && pwd)/$(basename "$0"))"
     local CRON_SCHEDULE="0 */3 * * *"
 
    # Create log and backup directory if they doesn't exists
@@ -124,9 +124,6 @@ setup() {
                 exit 1
             fi
         fi
-
-
-
     else
         # Add the cron job to the system if it doesn't exit
         (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
@@ -140,7 +137,5 @@ setup() {
 
     # Export variables for other scripts
     export LOG_DIR BACKUP_DIR 
-
-   
 
 }

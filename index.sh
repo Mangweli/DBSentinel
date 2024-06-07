@@ -12,9 +12,6 @@ fi
 # Call the setup function
 setup
 
-echo "LOG_DIR: $LOG_DIR"
-echo "BACKUP_DIR: $BACKUP_DIR"
-
 MYSQL_CNF_FILE="$(dirname "$0")/.mysql.cnf"
 
 # Create log and backup directory if they doesn't exists
@@ -32,4 +29,4 @@ if [ ! -f "$MYSQL_CNF_FILE" ]; then
 fi
 
 # Perform database backup
-#perform_backup "$LOG_DIR" "$BACKUP_DIR" "$MYSQL_CNF_FILE"
+perform_backup "$LOG_DIR" "$BACKUP_DIR" "$MYSQL_CNF_FILE"
