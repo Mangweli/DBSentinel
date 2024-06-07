@@ -12,7 +12,7 @@ DB Sentinel is a script for automating the backup of MySQL databases. It handles
 ├── index.sh
 ├── util.sh
 └── README.md
-
+```
 
 - `backup/`: Directory where database backups are stored.
 - `logs/`: Directory where log files are stored.
