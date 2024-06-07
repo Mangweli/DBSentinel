@@ -15,12 +15,6 @@ setup
 MYSQL_CNF_FILE="$(dirname "$0")/.mysql.cnf"
 
 # Create log and backup directory if they doesn't exists
-mkdir -p $LOG_DIR
-mkdir -p $BACKUP_DIR
-
-# Load env file
-# ENV_FILE="$(dirname "$0")/.env";
-# load_env_file "$ENV_FILE" "$LOG_DIR"
 
 # Ensure .cnf file exists
 if [ ! -f "$MYSQL_CNF_FILE" ]; then
