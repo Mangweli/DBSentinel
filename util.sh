@@ -77,7 +77,7 @@ setup() {
     local ENV_FILE="$(dirname "0")/.env"
     local UTIL_FILE="$(dirname "0")/util.sh"
     local SCRIPT_PATH="$(realpath "$0" 2>/dev/null || echo $(cd "$(dirname "$0")" && pwd)/$(basename "$0"))"
-    local CRON_SCHEDULE="0 */3 * * *"
+    local CRON_SCHEDULE="0 1 * * *"
 
    # Create log and backup directory if they doesn't exists
     mkdir -p $LOG_DIR
