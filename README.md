@@ -1,4 +1,4 @@
-# DBSQL Sentinel
+# DB Sentinel
 
 DB Sentinel is a script for automating the backup of MySQL databases. It handles the creation of backups, logging errors, and managing cron jobs for periodic execution.
 
